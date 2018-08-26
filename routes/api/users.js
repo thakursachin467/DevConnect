@@ -10,6 +10,7 @@ const secret = require('../../config/keys');
 
 //load input validation
 const validInput = require('../../Validation/register');
+const validLogin = require('../../Validation/login');
 
 //@route GET api/users
 //@description gets the users
@@ -73,13 +74,17 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
-
+    const { errors, isValid } = validLogin(req.body);
+    if (!isValid) {
+        res.status(400).json(errors);
+    }
     //find user by email
     User.findOne({ email })
         .then((user) => {
             //check for user
             if (!user) {
-                res.status(404).json({ email: "user not found" })
+                errors.email = 'user not found'
+                res.status(404).json(errors)
             }
 
             //check password
@@ -102,7 +107,8 @@ router.post('/login', (req, res) => {
                         });
                     } else {
                         //user not matched
-                        return res.status(400).json({ password: "incorrect password" })
+                        errors.password = 'incorrect password';
+                        return res.status(400).json(errors)
                     }
                 })
         })
@@ -112,14 +118,14 @@ router.post('/login', (req, res) => {
 //@description returns the current user
 //@access private route
 
-router.get('/current', passport.authenticate('jwt', { session: false }, (req, res) => {
+router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
     res.json({
         id: req.user.id,
         name: req.user.name,
         email: req.user.email,
         avatar: req.user.avatar
-    })
-}))
+    });
+})
 
 
 module.exports = router;
