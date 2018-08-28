@@ -3,7 +3,7 @@ const isEmpty = require('./isDashEmpty');
 
 module.exports = function validateLoginUser(data) {
     let errors = {};
-    console.log(isEmpty(data.email))
+
     data.email = !isEmpty(data.email) ? data.email : '';
     data.password = !isEmpty(data.password) ? data.password : '';
 
