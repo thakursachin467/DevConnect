@@ -5,6 +5,8 @@ const passport = require('passport');
 
 //load the validations
 const profileValidation = require('../../Validation/profile');
+const experienceValidation = require('../../Validation/experience');
+const educationValidation = require('../../Validation/education');
 
 //load profile model
 const profile = require('../../models/Profile');
@@ -211,6 +213,13 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 //@access private route
 
 router.post('/experience', passport.authenticate('jwt', { session: false }), (req, res) => {
+    const { errors, isValid } = experienceValidation(req.body);
+
+    //check the validation
+    if (!isValid) {
+        //return errors with 400 status
+        return res.status(400).json(errors);
+    }
     profile.findOne({ user: req.user.id })
         .then((profile) => {
             const newExp = {
@@ -225,6 +234,40 @@ router.post('/experience', passport.authenticate('jwt', { session: false }), (re
 
             //add to experience array
             profile.experience.unshift(newExp);
+            profile.save()
+                .then((profile) => {
+                    res.json(profile)
+                })
+        })
+})
+
+
+//@route POST api/profile/education
+//@description add education to  the profile of user
+//@access private route
+
+router.post('/education', passport.authenticate('jwt', { session: false }), (req, res) => {
+    const { errors, isValid } = educationValidation(req.body);
+
+    //check the validation
+    if (!isValid) {
+        //return errors with 400 status
+        return res.status(400).json(errors);
+    }
+    profile.findOne({ user: req.user.id })
+        .then((profile) => {
+            const newEdu = {
+                school: req.body.school,
+                degree: req.body.degree,
+                fieldofstudy: req.body.fieldofstudy,
+                from: req.body.from,
+                to: req.body.to,
+                current: req.body.current,
+                description: req.body.description
+            }
+
+            //add to experience array
+            profile.education.unshift(newEdu);
             profile.save()
                 .then((profile) => {
                     res.json(profile)
