@@ -4,7 +4,7 @@
   "description": "A website where developer meet and help each other",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "snyk test",
     "start": "node app.js",
     "dev": "nodemon app.js",
     "client-install": "npm install --prefix client",
@@ -26,6 +26,7 @@
     "validator": "^10.6.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.3"
+    "nodemon": "^1.18.3",
+    "snyk": "^1.94.0"
   }
 }
