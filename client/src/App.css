@@ -1,13 +1,21 @@
 img {
   width: 100%;
 }
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  height: 100vh;
+  margin-bottom: 60px; /* Margin bottom by footer height */
+}
 
 .landing {
   position: relative;
   background: url('./img/showcase.jpg') no-repeat;
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  height: 94vh;
   margin-top: -24px;
   margin-bottom: -50px;
 }
@@ -36,4 +44,13 @@ img {
 
 .form-control::placeholder {
   color: #bbb !important;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px; /* Set the fixed height of the footer here */
+  line-height: 60px; /* Vertically center the text there */
+  background-color: #f5f5f5;
 }
