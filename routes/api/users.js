@@ -20,7 +20,7 @@ router.get('/test', (req, res) => {
 })
 
 
-//@route GET api/users/register
+//@route POST api/users/register
 //@description register  the users
 //@access public route
 
@@ -55,7 +55,15 @@ router.post('/register', (req, res) => {
                             if (err) throw err;
                             newUser.password = hash;
                             newUser.save()
-                                .then((user) => res.json(user))
+                                .then((user) => {
+                                    const resUser = {
+                                        name: user.name,
+                                        avatar: user.avatar,
+                                        email: user.email,
+
+                                    }
+                                    res.json(resUser)
+                                })
                                 .catch(err => console.log(err));
                         })
                     })
@@ -72,6 +80,7 @@ router.post('/register', (req, res) => {
 //@access public route
 
 router.post('/login', (req, res) => {
+
     const email = req.body.email;
     const password = req.body.password;
     const { errors, isValid } = validLogin(req.body);
