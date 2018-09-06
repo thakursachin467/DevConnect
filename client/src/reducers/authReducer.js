@@ -1,4 +1,5 @@
-import { TEST_DISPATCH } from '../actions/types'
+import { TEST_DISPATCH, SET_CURRENT_USER } from '../actions/types'
+import isEmpty from '../utils/isDashEmpty';
 const initiaState = {
     isAuthanticated: false,
     user: {}
@@ -10,6 +11,14 @@ export default function (state = initiaState, action) {
             return {
                 ...state,
                 user: action.payload
+            }
+        case SET_CURRENT_USER:
+            return {
+                ...state,
+                isAuthanticated: !isEmpty(action.payload),
+                user: {
+                    ...action.payload
+                }
             }
         default:
             return state;
