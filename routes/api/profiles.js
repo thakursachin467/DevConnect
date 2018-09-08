@@ -45,7 +45,7 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
 })
 
 
-//@route GET api/profile/all
+//@route GET api/profile/users
 //@description gets the profile of all users 
 //@access public route
 
