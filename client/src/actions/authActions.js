@@ -3,14 +3,18 @@ import axios from 'axios';
 import { TEST_DISPATCH, GET_ERRORS, SET_CURRENT_USER } from './types';
 import setAuthToken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
+import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
 //Register user
 export const registerUser = (userData, history) => dispatch => {
+    dispatch(showLoading())
     axios.post('/api/users/register', userData)
         .then((res) => {
+            dispatch(hideLoading())
             history.push('/login')
         })
         .catch((err) => {
+            dispatch(hideLoading())
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
@@ -24,8 +28,10 @@ export const registerUser = (userData, history) => dispatch => {
 
 //Login user
 export const loginuser = (userData, history) => dispatch => {
+    dispatch(showLoading())
     axios.post('/api/users/login', userData)
         .then((res) => {
+
             //save token to local storage
             const { token } = res.data;
             //set token local storage
@@ -43,9 +49,11 @@ export const loginuser = (userData, history) => dispatch => {
             /**
              * ! set current user
              */
+            dispatch(hideLoading())
             dispatch(setCurrentUser(decoded))
         })
         .catch((err) => {
+            dispatch(hideLoading())
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
