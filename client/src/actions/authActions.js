@@ -64,3 +64,21 @@ export const setCurrentUser = (decode) => {
         payload: decode
     }
 }
+
+
+/**
+ * ! Logout action
+ */
+
+export const logoutUser = () => dispatch => {
+    //remove token from local sstorage
+    localStorage.removeItem('jwttoken');
+    /**
+     * ! remove  auth header for future request
+     */
+
+    setAuthToken(false);
+    //set current user to empy user
+    dispatch(setCurrentUser({}));
+
+}
