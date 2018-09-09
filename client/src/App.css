@@ -61,16 +61,24 @@ body {
 ! thanku loading.io for this amazing css loader
 */
 
+.parent
+{
+    width: 100%;
+    margin-top: 100px;
+  
+    text-align: center;
+}
+
 .lds-grid {
   display: inline-block;
   position: relative;
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
 }
 .lds-grid div {
   position: absolute;
-  width: 13px;
-  height: 13px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   background: rgb(131, 4, 4);
   animation: lds-grid 1.2s linear infinite;
