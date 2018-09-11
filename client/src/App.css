@@ -6,8 +6,8 @@ html {
   min-height: 100%;
 }
 body {
-  height: 100vh;
-  margin-bottom: 60px; /* Margin bottom by footer height */
+  min-height: 100vh;
+  padding-bottom: 60px; /* padding bottom by footer height */
 }
 
 .landing {
@@ -15,7 +15,7 @@ body {
   background: url('./img/showcase.jpg') no-repeat;
   background-size: cover;
   background-position: center;
-  height: 94vh;
+  height: 99vh;
   margin-top: -24px;
   margin-bottom: -50px;
 }
