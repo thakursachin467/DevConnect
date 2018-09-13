@@ -6,7 +6,7 @@ import InputGroup from '../Common/InputGroup';
 import SelectListGroup from '../Common/SelectListGroup';
 import TextAreaGroup from '../Common/TextAreaGroup';
 import { createProfile, getCurrentProfile } from '../../actions/profileAction';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import isEmpty from '../../utils/isDashEmpty';
 
 class EditProfile extends Component {
@@ -172,6 +172,7 @@ class EditProfile extends Component {
                     </div>
                     <div className="row">
                         <div className="col-md-8 m-auto">
+                            <Link to='/dashboard' className="btn btn-light">Go Back</Link>
                             <h1 className="display-4 text-center">Edit Your Profile</h1>
                             <small className="d-black pd-3 text-muted">* means the fields is required</small>
                             <form onSubmit={this.onSubmit}>
