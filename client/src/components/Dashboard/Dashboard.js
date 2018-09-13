@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { getCurrentProfile } from '../../actions/profileAction';
 import propTypes from 'prop-types';
 import Loading from '../Common/Loading';
+import ProfileActions from './ProfileAction';
 
 
 
@@ -24,7 +25,12 @@ class Dashboard extends Component {
              */
 
             if (Object.keys(profile).length > 0) {
-                dashboardContent = <h1>TODO:display profile</h1>
+                dashboardContent = (
+                    <div>
+                        <p className="lead text-muted"> Welcome <Link to="{`/profile/${profile.handle}`}"></Link>{user.name}</p>
+                        <ProfileActions />
+                    </div>
+                )
             } else {
                 //user has a valid account but hasn't made a profile
                 dashboardContent = (
