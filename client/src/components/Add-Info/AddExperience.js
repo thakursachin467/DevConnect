@@ -4,6 +4,8 @@ import { Link, withRouter } from 'react-router-dom';
 import TextFieldGroup from '../Common/textFieldGroup';
 import TextArea from '../Common/TextAreaGroup';
 import propTypes from 'prop-types'
+import { addExperience } from '../../actions/profileAction'
+
 class AddExperience extends Component {
     constructor(props) {
         super(props);
@@ -24,12 +26,28 @@ class AddExperience extends Component {
         this.onCheck = this.onCheck.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.errors) {
+            this.setState({ errors: nextProps.errors })
+        }
+    }
+
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value })
     }
     onSubmit(e) {
         e.preventDefault()
-
+        const expData = {
+            company: this.state.company,
+            title: this.state.title,
+            experience: this.state.experience,
+            location: this.state.location,
+            from: this.state.from,
+            to: this.state.to,
+            current: this.state.current,
+            description: this.state.description
+        }
+        this.props.addExperience(expData, this.props.history)
 
     }
     onCheck(e) {
@@ -56,6 +74,7 @@ class AddExperience extends Component {
                                     value={this.state.company}
                                     onChange={this.onChange}
                                     error={errors.company}
+                                    info="Tell us your company name"
                                 />
                                 <TextFieldGroup
                                     placeholder="* job title"
@@ -63,6 +82,7 @@ class AddExperience extends Component {
                                     value={this.state.title}
                                     onChange={this.onChange}
                                     error={errors.title}
+                                    info="Tell us you job title"
                                 />
                                 <TextFieldGroup
                                     placeholder="Location"
@@ -70,8 +90,10 @@ class AddExperience extends Component {
                                     value={this.state.location}
                                     onChange={this.onChange}
                                     error={errors.location}
+                                    info="Tell us your job location"
                                 />
                                 <h6>From Date</h6>
+
                                 <TextFieldGroup
                                     placeholder="from"
                                     name="from"
@@ -79,6 +101,7 @@ class AddExperience extends Component {
                                     value={this.state.from}
                                     onChange={this.onChange}
                                     error={errors.from}
+                                    info="Tell us when you started working here"
                                 />
                                 <h6>To Date</h6>
                                 <TextFieldGroup
@@ -89,6 +112,7 @@ class AddExperience extends Component {
                                     onChange={this.onChange}
                                     error={errors.to}
                                     disabled={this.state.disabled ? 'disabled' : ''}
+                                    info="Have you left your job here?"
                                 />
                                 <div className="form-check mb-4">
                                     <input type="checkbox"
@@ -131,7 +155,8 @@ class AddExperience extends Component {
 
 AddExperience.propTypes = {
     profile: propTypes.object.isRequired,
-    errors: propTypes.object.isRequired
+    errors: propTypes.object.isRequired,
+    addExperience: propTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -140,4 +165,4 @@ const mapStateToProps = (state) => ({
 })
 
 
-export default connect(mapStateToProps)(withRouter(AddExperience));
+export default connect(mapStateToProps, { addExperience })(withRouter(AddExperience));
