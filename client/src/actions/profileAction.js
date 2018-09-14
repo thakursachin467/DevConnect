@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_PROFILE, PROFILE_LOADING, GET_ERRORS, CLEAR_CURRENT_PROFILE, SET_CURRENT_USER } from './types';
+import { GET_PROFILE, PROFILE_LOADING, GET_ERRORS, CLEAR_CURRENT_PROFILE, SET_CURRENT_USER, GET_PROFILES } from './types';
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
 /**
@@ -11,6 +11,7 @@ export const getCurrentProfile = () => dispatch => {
     dispatch(setProfileLoading())
     axios.get('/api/profiles')
         .then((res) => {
+            dispatch(setProfileLoading())
             dispatch(hideLoading())
             dispatch({
                 type: GET_PROFILE,
@@ -18,6 +19,7 @@ export const getCurrentProfile = () => dispatch => {
             })
         })
         .catch((err) => {
+            dispatch(setProfileLoading())
             dispatch(hideLoading())
             dispatch({
                 type: GET_PROFILE,
@@ -160,4 +162,31 @@ export const deleteEducation = (id) => dispatch => {
 
         })
 
+}
+
+
+//get all profiles
+
+export const getProfiles = () => dispatch => {
+    dispatch(showLoading())
+    dispatch(setProfileLoading())
+    axios.get('api/profiles/users')
+        .then((res) => {
+            dispatch(setProfileLoading())
+            dispatch(hideLoading())
+            dispatch({
+                type: GET_PROFILES,
+                payload: res.data
+            })
+
+        })
+        .catch((err) => {
+            dispatch(setProfileLoading())
+            dispatch(hideLoading())
+            dispatch({
+                type: GET_PROFILES,
+                payload: null
+            })
+
+        })
 }

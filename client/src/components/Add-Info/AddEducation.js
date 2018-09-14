@@ -135,7 +135,7 @@ class AddEducation extends Component {
 
                                 </div>
                                 <TextArea
-                                    placeholder="Job Description"
+                                    placeholder="Program or Certification Description"
                                     name="description"
                                     type="description"
                                     value={this.state.description}
