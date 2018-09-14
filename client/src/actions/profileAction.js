@@ -68,6 +68,8 @@ export const createProfile = (profileData, history) => dispatch => {
 
 }
 
+//delete entire account
+
 export const deleteAccount = () => dispatch => {
     if (window.confirm('Are you sure? this action cannot be reversed!')) {
         axios.delete('/api/profiles')
@@ -87,6 +89,8 @@ export const deleteAccount = () => dispatch => {
 
 }
 
+//add experience
+
 export const addExperience = (expData, history) => dispatch => {
     axios.post('api/profiles/experience', expData)
         .then((res) => {
@@ -100,6 +104,8 @@ export const addExperience = (expData, history) => dispatch => {
         })
 }
 
+//add education
+
 export const addEducation = (eduData, history) => dispatch => {
     axios.post('api/profiles/education', eduData)
         .then((res) => {
@@ -111,4 +117,47 @@ export const addEducation = (eduData, history) => dispatch => {
                 payload: err.response.data
             })
         })
+}
+
+//delete experience
+export const deleteExperience = (id) => dispatch => {
+
+    axios.delete(`api/profiles/experience/${id}`)
+        .then((res) => {
+            dispatch({
+                type: GET_PROFILE,
+                payload: res.data
+            })
+
+        })
+        .catch((err) => {
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+
+        })
+
+}
+
+
+//delete education 
+export const deleteEducation = (id) => dispatch => {
+
+    axios.delete(`api/profiles/education/${id}`)
+        .then((res) => {
+            dispatch({
+                type: GET_PROFILE,
+                payload: res.data
+            })
+
+        })
+        .catch((err) => {
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+
+        })
+
 }

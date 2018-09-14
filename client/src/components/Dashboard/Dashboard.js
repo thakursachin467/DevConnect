@@ -45,7 +45,7 @@ class Dashboard extends Component {
                         <ProfileActions />
                         <Experience experience={profile.experience} />
                         <Education education={profile.education} />
-                        {/* TODO experience and education */}
+
                         <div style={{ marginBottom: '60px' }}>
                             <button className="btn btn-danger" onClick={this.onDelectClick}>
                                 Delete my account

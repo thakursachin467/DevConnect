@@ -6,7 +6,7 @@ import InputGroup from '../Common/InputGroup';
 import SelectListGroup from '../Common/SelectListGroup';
 import TextAreaGroup from '../Common/TextAreaGroup';
 import { createProfile } from '../../actions/profileAction';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 class CreateProfile extends Component {
     constructor(props) {
@@ -133,6 +133,7 @@ class CreateProfile extends Component {
                     </div>
                     <div className="row">
                         <div className="col-md-8 m-auto">
+                            <Link to='/dashboard' className="btn btn-light">Go Back</Link>
                             <h1 className="display-4 text-center">Create Your Profile</h1>
                             <p className="lead text-center">
                                 Please add some info to create your awesome DevConnect Profile
