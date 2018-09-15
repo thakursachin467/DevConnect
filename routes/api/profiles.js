@@ -70,11 +70,11 @@ router.get('/users', (req, res) => {
 
 
 
-//@route GET api/profile/handle/:handle
+//@route GET api/profiles/:handle
 //@description gets the profile by handle 
 //@access public route
 
-router.get('/handle/:handle', (req, res) => {
+router.get('/:handle', (req, res) => {
     const errors = {}
     profile.findOne({ handle: req.params.handle })
         .populate('user', ['name', 'avatar'])
@@ -98,7 +98,7 @@ router.get('/handle/:handle', (req, res) => {
 //@description gets the profile by user id 
 //@access public route
 
-router.get('/user/:user_id', (req, res) => {
+router.get('/:user_id', (req, res) => {
     const errors = {}
     profile.findOne({ user: req.params.user_id })
         .populate('user', ['name', 'avatar'])
