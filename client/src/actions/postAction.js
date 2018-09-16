@@ -27,3 +27,36 @@ export const addPost = (postData) => dispatch => {
 
 }
 
+//fetch all post
+
+export const getPost = () => dispatch => {
+    dispatch(showLoading())
+    dispatch(postLoading())
+    axios.get('/api/posts')
+        .then((res) => {
+
+            dispatch({
+                type: GET_POSTS,
+                payload: res.data
+            })
+            dispatch(postLoading())
+            dispatch(hideLoading())
+
+        })
+        .catch((err) => {
+            dispatch({
+                type: GET_POSTS,
+                payload: null
+            })
+            dispatch(postLoading())
+            dispatch(hideLoading())
+        })
+
+}
+
+
+export const postLoading = () => {
+    return {
+        type: POST_LOADING
+    }
+}

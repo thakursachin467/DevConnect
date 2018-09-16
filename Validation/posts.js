@@ -11,7 +11,7 @@ module.exports = function validatepostinput(data) {
     }
 
     if (validator.isEmpty(data.text)) {
-        errors.text = "Text field  is required"
+        errors.text = "You must write something to share it."
     }
 
 

@@ -7,6 +7,21 @@ const initialState = {
 
 export default function (state = initialState, action) {
     switch (action.type) {
+        case POST_LOADING:
+            return {
+                ...state,
+                loading: !state.loading
+            }
+        case ADD_POST:
+            return {
+                ...state,
+                posts: [action.payload, ...state.posts]
+            }
+        case GET_POSTS:
+            return {
+                ...state,
+                posts: action.payload
+            }
         default:
             return {
                 ...state
