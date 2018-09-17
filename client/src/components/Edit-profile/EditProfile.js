@@ -91,6 +91,7 @@ class EditProfile extends Component {
     }
     onSubmit(e) {
         e.preventDefault()
+
         const profileData = {
             handle: this.state.handle,
             company: this.state.company,
@@ -106,6 +107,7 @@ class EditProfile extends Component {
             youtube: this.state.youtube,
             instagram: this.state.instagram
         }
+
         this.props.createProfile(profileData, this.props.history)
 
     }
@@ -130,26 +132,26 @@ class EditProfile extends Component {
 
                     <InputGroup
                         placeholder="facebook profile url"
-                        name="twitter" icon="fab fa-facebook"
+                        name="facebook" icon="fab fa-facebook"
                         value={this.state.facebook}
                         onChange={this.onChange}
                         error={errors.facebook} />
                     <InputGroup
                         placeholder="linkedin profile url"
-                        name="twitter" icon="fab fa-linkedin"
+                        name="linkedin" icon="fab fa-linkedin"
                         value={this.state.linkedin}
                         onChange={this.onChange}
                         error={errors.linkedin} />
 
                     <InputGroup
                         placeholder="youtube profile url"
-                        name="twitter" icon="fab fa-youtube"
+                        name="youtube" icon="fab fa-youtube"
                         value={this.state.youtube}
                         onChange={this.onChange}
                         error={errors.youtube} />
                     <InputGroup
                         placeholder="instagram profile url"
-                        name="twitter" icon="fab fa-instagram"
+                        name="instagram" icon="fab fa-instagram"
                         value={this.state.instagram}
                         onChange={this.onChange}
                         error={errors.instagram} />
@@ -230,10 +232,10 @@ class EditProfile extends Component {
 
                                 <TextFieldGroup
                                     placeholder="github username"
-                                    name="github"
-                                    value={this.state.github}
+                                    name="githubusername"
+                                    value={this.state.githubusername}
                                     onChange={this.onChange}
-                                    error={errors.github}
+                                    error={errors.githubusername}
                                     info="Please add your github username. It will add latest repos to your profile"
                                 />
 

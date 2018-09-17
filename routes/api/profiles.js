@@ -129,6 +129,7 @@ router.get('/:user_id', (req, res) => {
 //@access private route
 
 router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+
     const { errors, isValid } = profileValidation(req.body);
 
     //check the validation
@@ -168,7 +169,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
     if (req.body.instagram) profileFields.social.instagram = req.body.instagram;
     if (req.body.linkedin) profileFields.social.linkedin = req.body.linkedin;
 
-
+    console.log(profileFields)
     //save the data to our database
     profile.findOne({ user: req.user.id })
         .then((user) => {

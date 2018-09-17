@@ -12,38 +12,53 @@ class ProfileGithub extends Component {
             sort: 'created: asc',
             repo: []
         }
+        this.fetchGithubData = this.fetchGithubData.bind(this);
     }
+
     componentDidMount() {
-        const { username } = this.props
+    }
+
+    fetchGithubData(username) {
         const { count, sort, clientId, clientSecret } = this.state
+        console.log(username, this.props.username)
         fetch(`https://api.github.com/users/${username}/repos?per_page=${count}&sort=${sort}&client_id=${clientId}&client_secret=${clientSecret}`)
             .then((res) => res.json())
             .then((data) => {
-                if (this.refs.myRef) {
-                    this.setState({ repo: data })
-                }
+
+                this.setState({ repo: data })
 
 
             })
             .catch((err) => console.log(err))
 
     }
+
+
+
+
+
+
+
+
     render() {
+        const { username } = this.props
+        this.fetchGithubData(username)
         const { repo } = this.state;
         const repoItems = repo.map((rep) => {
-            <div key={repo.id} className="card card-body mb-2">
+            return <div key={rep.id} className="card card-body mb-2">
                 <div className="row">
                     <div className="col-md-6">
                         <h4>
-                            <Link to={repo.html_url} className="text-info" target="_blank">{repo.name}</Link>
+                            <a href={rep.html_url} className="text-info" target="_blank">{rep.name}</a>
+
                         </h4>
                         <p>{repo.description}</p>
 
                     </div>
                     <div className="col-md-6">
-                        <span className="badge badge-info mr-1"><strong>STARS:</strong> {repo.stargazers_count}</span>
-                        <span className="badge badge-secondary mr-1"><strong>Watchers:</strong> {repo.watchers_count}</span>
-                        <span className="badge badge-sucsess "><strong>Forks:</strong> {repo.forks_count}</span>
+                        <span className="badge badge-info mr-1"><strong>Stars:</strong> {rep.stargazers_count}</span>
+                        <span className="badge badge-secondary mr-1"><strong>Watchers:</strong> {rep.watchers_count}</span>
+                        <span className="badge badge-sucsess "><strong>Forks:</strong> {rep.forks_count}</span>
 
                     </div>
 
@@ -55,6 +70,7 @@ class ProfileGithub extends Component {
                 <hr />
                 <h3 className="mb-4">Latest github repos</h3>
                 {repoItems}
+
 
             </div>
         )
