@@ -1,50 +1,67 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux';
-import propTypes from 'prop-types';
-import { deleteComment } from '../../actions/postAction';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import propTypes from "prop-types";
+import { deleteComment } from "../../actions/postAction";
+import Moment from "react-moment";
+import { Link } from "react-router-dom";
+
 class CommentItem extends Component {
-    onDeleteClick(postId, commentId) {
-        this.props.deleteComment(commentId, postId)
-    }
-    render() {
-        const { comment, postId, auth } = this.props
-        return (
-            <div className="card card-body mb-3">
-                <div className="row">
-                    <div className="col-md-2">
-                        <a href="profile.html">
-                            <img className="rounded-circle d-none d-md-block" src={comment.avatar} alt="" />
-                        </a>
-                        <br />
-                        <p className="text-center">{comment.name}</p>
-                    </div>
-                    <div className="col-md-10">
-                        <p className="lead">{comment.text}</p>
-                        {
-                            comment.user === auth.user.id ? (
-                                <button type="button" onClick={this.onDeleteClick.bind(this, postId, comment._id)} className="btn btn-danger mr-1">
-                                    <i className="fas fa-times"></i>
-                                </button>
-                            ) : null
-                        }
-
-                    </div>
-
-                </div>
+  onDeleteClick(postId, commentId) {
+    this.props.deleteComment(commentId, postId);
+  }
+  render() {
+    const { comment, postId, auth } = this.props;
+    const imgUrl = comment.avatar;
+    const divStyle = {
+      backgroundImage: "url(" + imgUrl + ")"
+    };
+    return (
+      <div>
+        <div className="comment-wrap">
+          <div className="photo">
+            <div className="avatar" style={divStyle} />
+          </div>
+          <div className="comment-block">
+            <p>
+              <Link to={`/profile/user/${comment.user}`} className="text-dark">
+                {comment.name}
+              </Link>
+            </p>
+            <p className="comment-text">{comment.text}</p>
+            <div className="bottom-comment">
+              <div className="comment-date">
+                <Moment fromNow>{comment.date}</Moment>
+              </div>
+              {comment.user === auth.user.id ? (
+                <ul className="comment-actions">
+                  <li
+                    className="complain"
+                    onClick={this.onDeleteClick.bind(this, postId, comment._id)}
+                  >
+                    Delete
+                  </li>
+                </ul>
+              ) : null}
             </div>
-        )
-    }
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 CommentItem.propTypes = {
-    comment: propTypes.object.isRequired,
-    postId: propTypes.string.isRequired,
-    deleteComment: propTypes.func.isRequired,
-    auth: propTypes.object.isRequired
-}
+  comment: propTypes.object.isRequired,
+  postId: propTypes.string.isRequired,
+  deleteComment: propTypes.func.isRequired,
+  auth: propTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
-    auth: state.auth
-})
+  auth: state.auth
+});
 
-export default connect(mapStateToProps, { deleteComment })(CommentItem);
+export default connect(
+  mapStateToProps,
+  { deleteComment }
+)(CommentItem);
