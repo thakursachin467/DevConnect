@@ -73,7 +73,7 @@ class PostItem extends Component {
 
               <div className="bottom-comment mt-3">
                 <div className="comment-date">
-                  <Moment fromNow>{post.date}</Moment>
+                  Posted <Moment fromNow>{post.date}</Moment>
                   <p className="mt-3 text-muted">
                     {post.comments.length}{" "}
                     {post.comments.length > 1

@@ -21,7 +21,7 @@ class Post extends Component {
       postContent = (
         <div>
           <PostItem post={post} showActions={false} />
-          <AddComment postId={post._id} />
+          <AddComment postId={post._id} name={post.name} />
           <CommentFeed postId={post._id} comment={post.comments} />
         </div>
       );
@@ -31,8 +31,8 @@ class Post extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <Link to="/feed" className="btn btn-light mb-3">
-                Back to Posts
+              <Link to="/articles" className="btn btn-light mb-3">
+                Back to Articles
               </Link>
               {postContent}
             </div>

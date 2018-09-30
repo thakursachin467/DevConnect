@@ -98,7 +98,7 @@ class App extends Component {
                   path="/add-education"
                   component={AddEducation}
                 />
-                <PrivateRoute exact path="/feed" component={Posts} />
+                <PrivateRoute exact path="/articles" component={Posts} />
                 <PrivateRoute exact path="/post/:id" component={Post} />
               </Switch>
               <Route exact path="/not-found" component={NotFound} />

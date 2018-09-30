@@ -40,7 +40,6 @@ class CommentForm extends Component {
   render() {
     const { errors, text } = this.state;
     const imgUrl = this.props.user.user.avatar;
-    console.log(imgUrl);
     const divStyle = {
       backgroundImage: "url(" + imgUrl + ")"
     };
@@ -55,7 +54,7 @@ class CommentForm extends Component {
             <TextAreaGroup
               onClick={this.onClick}
               className="form-control form-control-lg"
-              placeholder="reply to post"
+              placeholder={`Reply to ${this.props.name}'s post`}
               onChange={this.onChange}
               name="text"
               value={text}

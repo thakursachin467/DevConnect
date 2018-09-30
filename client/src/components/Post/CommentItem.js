@@ -30,7 +30,7 @@ class CommentItem extends Component {
             <p className="comment-text">{comment.text}</p>
             <div className="bottom-comment">
               <div className="comment-date">
-                <Moment fromNow>{comment.date}</Moment>
+                Replied <Moment fromNow>{comment.date}</Moment>
               </div>
               {comment.user === auth.user.id ? (
                 <ul className="comment-actions">
