@@ -57,16 +57,19 @@ export const clearCurrentProfile = () => {
  */
 
 export const createProfile = (profileData, history) => dispatch => {
+  dispatch(showLoading());
   axios
     .post("api/profiles", profileData)
     .then(res => {
       history.push("/dashboard");
+      dispatch(hideLoading());
     })
     .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       });
+      dispatch(hideLoading());
     });
 };
 
@@ -94,37 +97,44 @@ export const deleteAccount = () => dispatch => {
 //add experience
 
 export const addExperience = (expData, history) => dispatch => {
+  dispatch(showLoading());
   axios
     .post("api/profiles/experience", expData)
     .then(res => {
       history.push("/dashboard");
+      dispatch(hideLoading());
     })
     .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       });
+      dispatch(hideLoading());
     });
 };
 
 //add education
 
 export const addEducation = (eduData, history) => dispatch => {
+  dispatch(showLoading());
   axios
     .post("api/profiles/education", eduData)
     .then(res => {
       history.push("/dashboard");
+      dispatch(hideLoading());
     })
     .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       });
+      dispatch(hideLoading());
     });
 };
 
 //delete experience
 export const deleteExperience = id => dispatch => {
+  dispatch(showLoading());
   axios
     .delete(`api/profiles/experience/${id}`)
     .then(res => {
@@ -132,17 +142,20 @@ export const deleteExperience = id => dispatch => {
         type: GET_PROFILE,
         payload: res.data
       });
+      dispatch(hideLoading());
     })
     .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       });
+      dispatch(hideLoading());
     });
 };
 
 //delete education
 export const deleteEducation = id => dispatch => {
+  dispatch(showLoading());
   axios
     .delete(`api/profiles/education/${id}`)
     .then(res => {
@@ -150,12 +163,14 @@ export const deleteEducation = id => dispatch => {
         type: GET_PROFILE,
         payload: res.data
       });
+      dispatch(hideLoading());
     })
     .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       });
+      dispatch(hideLoading());
     });
 };
 
