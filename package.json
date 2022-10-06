@@ -29,6 +29,6 @@
   },
   "devDependencies": {
     "nodemon": "^1.18.3",
-    "snyk": "^1.94.0"
+    "snyk": "^1.996.0"
   }
 }
